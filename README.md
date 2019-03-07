@@ -1,5 +1,1 @@
-"# Gui-Base" 
-"# JavaGui" 
-"# JavaGui" 
-"# JavaGui" 
-"# JavaGui" 
+Standard MVC Gui Starter Projekt
