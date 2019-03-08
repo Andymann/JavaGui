@@ -13,7 +13,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import javax.swing.Timer;
 
 import controlElements.BTButton;
 import controller.ControllerImpl;
@@ -28,25 +27,18 @@ public class Gui extends JFrame implements Observer{
 	public Gui() {
 		
 		this.initFrame();
-		
-		new ViewHelper().initRaster(15, 9, this, false);
-		this.initButtons();
 		this.placeCompponents();
 		ControllerImpl.getInstance().addObserver( this );
 	}
 	
 	private void initFrame() {
 		this.setTitle( ControllerImpl.getInstance().getName() + " Version " + ControllerImpl.getInstance().getVersion() );
-		this.getContentPane().setBackground( Color.DARK_GRAY.brighter() );
+		this.getContentPane().setBackground( Color.DARK_GRAY );
 		this.setSize( new Dimension(800, 480) );
 		this.setLocationRelativeTo( null );
 		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		this.cardLayout = new JPanel( new CardLayout());
 		//this.setUndecorated(true);
-	}
-	
-	private void initButtons() {
-//		this.btnTest = new BTButton("btnTest");
 	}
 	
 	
@@ -70,7 +62,9 @@ public class Gui extends JFrame implements Observer{
 	 */
 	public void selectView(String pScreenName){
 		
-		Timer timer = new Timer(0, new ActionListener() {    		
+		/*
+		//----Javax.Swing.Timer findet immer im EDT statt.
+		javax.swing.Timer timer = new javax.swing.Timer(0, new ActionListener() {    		
             public void actionPerformed(ActionEvent e) {
             	cl.show(cardLayout, pScreenName);
             }
@@ -78,6 +72,12 @@ public class Gui extends JFrame implements Observer{
     	timer.setInitialDelay(0);
         timer.setRepeats(false);
         timer.start();
+        */
+		SwingUtilities.invokeLater(new Runnable() {
+	        public void run() {
+	        	cl.show(cardLayout, pScreenName);
+	        }
+	    });		
 	}
 	
 	
