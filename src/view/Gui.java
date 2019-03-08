@@ -1,14 +1,19 @@
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
 import controlElements.BTButton;
 import controller.ControllerImpl;
@@ -16,7 +21,9 @@ import model.ObserverData;
 
 public class Gui extends JFrame implements Observer{
 
-	private JButton btnTest;
+	
+	private JPanel cardLayout;
+	private CardLayout cl;
 	
 	public Gui() {
 		
@@ -34,15 +41,53 @@ public class Gui extends JFrame implements Observer{
 		this.setSize( new Dimension(800, 480) );
 		this.setLocationRelativeTo( null );
 		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		this.cardLayout = new JPanel( new CardLayout());
 		//this.setUndecorated(true);
 	}
 	
 	private void initButtons() {
-		this.btnTest = new BTButton("btnTest");
+//		this.btnTest = new BTButton("btnTest");
 	}
 	
+	
+	/**
+	 * Hinzufuegen von Views. Anschliessend muss finishGui() aufgerufen werden
+	 * @param pFrame
+	 * @param pViewname
+	 */
+	public void addView(ViewInterface pFrame){
+		this.cardLayout.add( ((JFrame)pFrame).getContentPane(), (pFrame.getViewName() ));	
+	}
+	
+	public void finishGui(){		
+		cl = (CardLayout)(this.cardLayout.getLayout());
+		this.setVisible(true);
+	}
+	
+	/**
+	 * Ruft einen der im CardLayout hinterlegten Screens auf.
+	 * 
+	 */
+	public void selectView(String pScreenName){
+		
+		Timer timer = new Timer(0, new ActionListener() {    		
+            public void actionPerformed(ActionEvent e) {
+            	cl.show(cardLayout, pScreenName);
+            }
+        });
+    	timer.setInitialDelay(0);
+        timer.setRepeats(false);
+        timer.start();
+	}
+	
+	
 	private void placeCompponents() {
-		new ViewHelper().placeComponent(this, btnTest, 4, 3, 2, 1);
+		this.setLayout( new BorderLayout() );
+		this.add( this.cardLayout, BorderLayout.CENTER );
+		//this.add( ghf.getContentPane(), BorderLayout.NORTH );
+		//this.add( new GuiBottomFrame(WIDTH).getContentPane(), BorderLayout.SOUTH );
+		
+		
 	}
 
 	@Override

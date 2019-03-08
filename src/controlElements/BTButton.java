@@ -21,6 +21,7 @@ public class BTButton extends JButton{
 		this.setFocusPainted(false);
 		this.setPreferredSize(this.getSize());	//dadurch ist die Breite der Buttons unabhaengig vom Text
 		this.setMargin(new Insets(1, 1, 1, 1));
+		
 	}
 
 }

@@ -14,7 +14,7 @@ import ch.bildspur.artnet.packets.PacketType;
 public class Model extends Observable {
 	
 	private static String NAME = "Test-Project";
-	private static String VERSION = "001";
+	private static String VERSION = "002";
 
 	private ArtNetServer artNetServer;
 	private ArtNetClient artNetClient;

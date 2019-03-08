@@ -2,6 +2,7 @@ import javax.swing.SwingUtilities;
 
 import controller.ControllerImpl;
 import model.ObserverData;
+import view.ViewFactory;
 
 public class Application {
 
@@ -20,7 +21,7 @@ public class Application {
 //         try {Thread.sleep(600);} catch (InterruptedException e) {}         
 //         ControllerImpl.getInstance().makeNotify(ObserverData.ODTYPE_BG_COLOR, ObserverData.OPVALUE_UNDEFINED, "0xAABBCC", ObserverData.OPBOOL_UNDEFINED);
         
-//        try {Thread.sleep(600);} catch (InterruptedException e) {}         
-//        ControllerImpl.getInstance().sendDMX();
+        try {Thread.sleep(600);} catch (InterruptedException e) {}         
+        ControllerImpl.getInstance().selectView(ViewFactory.VIEWNAME_TEST2);
 	}
 }

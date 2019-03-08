@@ -4,6 +4,7 @@ import java.util.Observer;
 
 import model.Model;
 import view.Gui;
+import view.ViewFactory;
 
 public class ControllerImpl {
 
@@ -22,7 +23,8 @@ public class ControllerImpl {
 	}
 	
 	public void init() {	
-		new Gui().setVisible( true );
+		//new Gui().setVisible( true );
+		ViewFactory.getInstance().initGui();
 	}
 	
 	public String getVersion() {
@@ -39,6 +41,10 @@ public class ControllerImpl {
 	
 	public void makeNotify(int pObserverType, int pValue, String pText, boolean pBool) {
 		this.model.makeNotify(pObserverType, pValue, pText, pBool);
+	}
+	
+	public void selectView(String pViewName) {
+		ViewFactory.getInstance().selectView(pViewName);
 	}
 	
 	
