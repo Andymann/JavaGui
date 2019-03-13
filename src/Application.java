@@ -21,7 +21,7 @@ public class Application {
 //         try {Thread.sleep(600);} catch (InterruptedException e) {}         
 //         ControllerImpl.getInstance().makeNotify(ObserverData.ODTYPE_BG_COLOR, ObserverData.OPVALUE_UNDEFINED, "0xAABBCC", ObserverData.OPBOOL_UNDEFINED);
         
-        try {Thread.sleep(600);} catch (InterruptedException e) {}         
-        ControllerImpl.getInstance().selectView(ViewFactory.VIEWNAME_TEST2);
+//        try {Thread.sleep(600);} catch (InterruptedException e) {}         
+//        ControllerImpl.getInstance().selectView(ViewFactory.VIEWNAME_TEST2);
 	}
 }

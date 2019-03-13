@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import ci.Colors;
 import controlElements.BTButton;
 import controller.ControllerImpl;
 import model.ObserverData;
@@ -33,7 +34,7 @@ public class Gui extends JFrame implements Observer{
 	
 	private void initFrame() {
 		this.setTitle( ControllerImpl.getInstance().getName() + " Version " + ControllerImpl.getInstance().getVersion() );
-		this.getContentPane().setBackground( Color.DARK_GRAY );
+		this.getContentPane().setBackground( Colors.BG_DEFAULT );
 		this.setSize( new Dimension(800, 480) );
 		this.setLocationRelativeTo( null );
 		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
@@ -42,17 +43,22 @@ public class Gui extends JFrame implements Observer{
 	}
 	
 	
+	
 	/**
 	 * Hinzufuegen von Views. Anschliessend muss finishGui() aufgerufen werden
 	 * @param pFrame
 	 * @param pViewname
 	 */
 	public void addView(ViewInterface pFrame){
-		this.cardLayout.add( ((JFrame)pFrame).getContentPane(), (pFrame.getViewName() ));	
+		this.cardLayout.add( ((JFrame)pFrame).getContentPane(), (pFrame.getViewID() ));	
 	}
 	
 	public void finishGui(){		
 		cl = (CardLayout)(this.cardLayout.getLayout());
+		
+		BottomFrame bf = new BottomFrame();
+		bf.updateFrame();		
+		this.add(bf.getContentPane(), BorderLayout.SOUTH);
 		this.setVisible(true);
 	}
 	

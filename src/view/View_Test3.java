@@ -7,20 +7,20 @@ import javax.swing.JFrame;
 
 import controlElements.BTButton;
 
-public class View_Test2 extends JFrame implements ViewInterface{
+public class View_Test3 extends JFrame implements ViewInterface{
 
 	private String sViewID;
 	private String sViewLabel;
 	private boolean bIsSelectable;
 	private JButton btnTest;	
-	private Color col = Color.GREEN.darker();
+	private Color col = Color.BLUE.darker();
 	private String sPassword;
 	
-	public View_Test2(String pViewID) {
+	public View_Test3(String pViewID) {
 		this.initView(pViewID, null, true, null);
 	}
 	
-	public View_Test2(String pViewID, String pViewLabel, boolean pIsSelectable, String pPassword) {
+	public View_Test3(String pViewID, String pViewLabel, boolean pIsSelectable, String pPassword) {
 		this.initView(pViewID, pViewLabel, pIsSelectable, pPassword);
 	}
 	
@@ -40,7 +40,7 @@ public class View_Test2 extends JFrame implements ViewInterface{
 	}
 	
 	private void placeComponents() {
-		new ViewHelper().placeComponent(this, btnTest, 3, 1, 2, 1);
+		new ViewHelper().placeComponent(this, btnTest, 5, 1, 2, 1);
 	}
 	
 	

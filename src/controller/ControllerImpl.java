@@ -1,10 +1,12 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.Observer;
 
 import model.Model;
-import view.Gui;
+import model.ObserverData;
 import view.ViewFactory;
+import view.ViewInterface;
 
 public class ControllerImpl {
 
@@ -43,10 +45,13 @@ public class ControllerImpl {
 		this.model.makeNotify(pObserverType, pValue, pText, pBool);
 	}
 	
-	public void selectView(String pViewName) {
-		ViewFactory.getInstance().selectView(pViewName);
+	public void selectView(String pViewID) {
+		ViewFactory.getInstance().selectView(pViewID);
+		this.model.makeNotify(ObserverData.ODTYPE_VIEWSELECTED, ObserverData.OPVALUE_UNDEFINED, pViewID, false);
 	}
 	
-	
+	public ArrayList<ViewInterface>getViews(){
+		return ViewFactory.getInstance().getViews();
+	}
 }//Class
 

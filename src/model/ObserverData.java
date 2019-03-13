@@ -10,7 +10,12 @@ public class ObserverData {
 	
 	
 	public static final int ODTYPE_TEST = 0x01;
-
+	
+	/**
+	 * Eine View wurde aufgerufen.
+	 * Die ViewID steck in getText()
+	 */
+	public static final int ODTYPE_VIEWSELECTED = 0x02;
 	
 	/**
 	 * Setzen der Hintergrundfarbe einer View. Der Farbwert kommt per String.

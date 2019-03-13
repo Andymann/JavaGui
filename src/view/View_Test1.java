@@ -9,20 +9,31 @@ import controlElements.BTButton;
 
 public class View_Test1 extends JFrame implements ViewInterface{
 
-	private String sViewName;
+	private String sViewID;
+	private String sViewLabel;
+	private boolean bIsSelectable;
 	private JButton btnTest;	
+	private Color col = Color.RED.darker();
+	private String sPassword;
 	
 	
-	public View_Test1(String pViewName) {
-		this.sViewName = pViewName;
-		this.initView();
-		this.initButtons();
-		this.placeComponents();
+	public View_Test1(String pViewID) {
+		this.initView(pViewID, null, true, null);
 	}
 	
-	private void initView() {
-		this.getContentPane().setBackground( Color.PINK.darker() );
+	public View_Test1(String pViewID, String pViewLabel, boolean pIsSelectable, String pPassword) {
+		this.initView(pViewID, pViewLabel, pIsSelectable, pPassword);
+	}
+	
+	private void initView(String pViewID, String pViewLabel, boolean pIsSelectable, String pPassword) {
+		this.sViewID = pViewID;
+		this.sPassword = pPassword;
 		new ViewHelper().initRaster(15, 9, this, false);		
+		this.initButtons();
+		this.placeComponents();
+		this.getContentPane().setBackground( col );
+		this.sViewLabel = pViewLabel;
+		this.bIsSelectable = pIsSelectable;
 	}
 	
 	private void initButtons() {
@@ -35,8 +46,28 @@ public class View_Test1 extends JFrame implements ViewInterface{
 	
 	
 	@Override
-	public String getViewName() {
-		return this.sViewName;
+	public String getViewID() {
+		return this.sViewID;
+	}
+
+	@Override
+	public boolean isSelectable() {
+		return bIsSelectable;
+	}
+
+	@Override
+	public Color getColor() {
+		return col;
+	}
+
+	@Override
+	public String getViewLabel() {
+		return this.sViewLabel;
+	}
+
+	@Override
+	public String getPassword() {
+		return sPassword;
 	}
 
 }//Class
