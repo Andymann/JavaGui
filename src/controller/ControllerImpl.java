@@ -45,10 +45,25 @@ public class ControllerImpl {
 		this.model.makeNotify(pObserverType, pValue, pText, pBool);
 	}
 	
+	/**
+	 * Aufruf einer View. 
+	 * Wenn eine View mit Passwort versehen ist, kann das Password mit ControllerImpl.enterPassword(String)
+	 * uebergeben werden.
+	 * @param pViewID
+	 */
 	public void selectView(String pViewID) {
 		ViewFactory.getInstance().selectView(pViewID);
 		this.model.makeNotify(ObserverData.ODTYPE_VIEWSELECTED, ObserverData.OPVALUE_UNDEFINED, pViewID, false);
 	}
+	
+	/**
+	 * Das Passwort fuer die in ViewFactory auf Freischaltung wartende View.
+	 * @param pPassword
+	 */
+	public void enterViewPassword(String pPassword) {
+		ViewFactory.getInstance().enterPassword(pPassword);
+	}
+	
 	
 	public ArrayList<ViewInterface>getViews(){
 		return ViewFactory.getInstance().getViews();
