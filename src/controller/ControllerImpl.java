@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 import java.util.Observer;
 
+import misc.PinManager;
 import model.Model;
 import model.ObserverData;
 import view.ViewFactory;
@@ -47,7 +48,7 @@ public class ControllerImpl {
 	
 	/**
 	 * Aufruf einer View. 
-	 * Wenn eine View mit Passwort versehen ist, kann das Password mit ControllerImpl.enterPassword(String)
+	 * Wenn eine View mit Passwort versehen ist, kann das Password anschliessend mit ControllerImpl.enterViewPassword(String)
 	 * uebergeben werden.
 	 * @param pViewID
 	 */
@@ -57,11 +58,25 @@ public class ControllerImpl {
 	}
 	
 	/**
-	 * Das Passwort fuer die in ViewFactory auf Freischaltung wartende View.
+	 * Eingabe einer einzelnen(!) Ziffer zur weiteren Konsturktion der kompletten PIN.
+	 */
+	public void enterViewPIN_Digit(char pDigit) {
+		PinManager.getInstance().addDigit(pDigit);
+	}
+	
+	/**
+	 * Das komplette(!) Passwort fuer die in ViewFactory auf Freischaltung wartende View.
 	 * @param pPassword
 	 */
-	public void enterViewPassword(String pPassword) {
-		ViewFactory.getInstance().enterPassword(pPassword);
+	public void enterViewPIN(String pPassword) {
+		ViewFactory.getInstance().enterPIN(pPassword);
+	}
+	
+	/**
+	 * Abbruch der Passworteingabe fuer die wartende View.
+	 */
+	public void cancelViewPIN() {
+		ViewFactory.getInstance().cancelPIN();
 	}
 	
 	

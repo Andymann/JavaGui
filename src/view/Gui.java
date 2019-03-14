@@ -55,7 +55,6 @@ public class Gui extends JFrame implements Observer{
 	
 	public void finishGui(){		
 		cl = (CardLayout)(this.cardLayout.getLayout());
-		
 		BottomFrame bf = new BottomFrame();
 		bf.updateFrame();		
 		this.add(bf.getContentPane(), BorderLayout.SOUTH);
@@ -64,6 +63,7 @@ public class Gui extends JFrame implements Observer{
 	
 	/**
 	 * Ruft einen der im CardLayout hinterlegten Screens auf.
+	 * Findet im EDT statt.
 	 * 
 	 */
 	public void selectView(String pScreenName){
@@ -90,10 +90,6 @@ public class Gui extends JFrame implements Observer{
 	private void placeCompponents() {
 		this.setLayout( new BorderLayout() );
 		this.add( this.cardLayout, BorderLayout.CENTER );
-		//this.add( ghf.getContentPane(), BorderLayout.NORTH );
-		//this.add( new GuiBottomFrame(WIDTH).getContentPane(), BorderLayout.SOUTH );
-		
-		
 	}
 
 	@Override

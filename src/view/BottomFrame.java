@@ -7,7 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import ci.Colors;
-import controlElements.BTLayerSelector;
+import controlElements.BTViewSelector;
 import controller.ControllerImpl;
 
 public class BottomFrame extends JFrame {
@@ -44,7 +44,7 @@ public class BottomFrame extends JFrame {
 			
 			for(int i=0; i<lstViewSelectable.size(); i++) {
 				//if(lstView.get(i).isSelectable()) {
-					BTLayerSelector btn = new BTLayerSelector(lstViewSelectable.get(i));
+					BTViewSelector btn = new BTViewSelector(lstViewSelectable.get(i));
 					ControllerImpl.getInstance().addObserver(btn);
 					vh.placeComponent(this, btn, i*2, 0, 2, 2);
 				//}

@@ -13,12 +13,12 @@ import controller.ControllerImpl;
 import model.ObserverData;
 import view.ViewInterface;
 
-public class BTLayerSelector extends JButton implements Observer{
+public class BTViewSelector extends JButton implements Observer{
 	
 	private String sConnectedViewID;
 	boolean bIsSelected;
 	
-	public BTLayerSelector() {
+	public BTViewSelector() {
 		super();
 		this.init();
 
@@ -29,7 +29,7 @@ public class BTLayerSelector extends JButton implements Observer{
 	 * @param pViewID Beschreibt den eindeutigen Viewnamen
 	 * @param pText Falls ein Label (ein ansprechender Text) fuer die View existiert
 	 */
-	public BTLayerSelector(ViewInterface pView) {
+	public BTViewSelector(ViewInterface pView) {
 		
 		sConnectedViewID = pView.getViewID();
 		
@@ -87,13 +87,13 @@ public class BTLayerSelector extends JButton implements Observer{
 	        		if(obsData.getType()==ObserverData.ODTYPE_VIEWSELECTED) {
 	        			if(obsData.getText().contentEquals(sConnectedViewID)) {
 	        				System.out.println("BTLayerSelector View Selected:" + obsData.getText());
-	        				BTLayerSelector.this.bIsSelected=true;
+	        				BTViewSelector.this.bIsSelected=true;
 	        			}else {
-	        				BTLayerSelector.this.bIsSelected = false;
+	        				BTViewSelector.this.bIsSelected = false;
 	        			}
 	        		}
 	        	}catch(Exception e) {
-	        		System.out.println("BTLayerSelector(" + BTLayerSelector.this.sConnectedViewID + ").update() Exception:" + e.getMessage() );
+	        		System.out.println("BTLayerSelector(" + BTViewSelector.this.sConnectedViewID + ").update() Exception:" + e.getMessage() );
 	        	}
 	        }
 	    });		
