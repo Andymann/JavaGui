@@ -85,7 +85,7 @@ public class ViewFactory {
 	 * die aktive View;
 	 * @return
 	 */
-	public ViewInterface getACitveView() {
+	public ViewInterface getActiveView() {
 		return this.viActive;
 	}
 	
