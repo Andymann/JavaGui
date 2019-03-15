@@ -81,11 +81,21 @@ public class ViewFactory {
 	}
 	
 	/**
+	 * Gibt die aktiv ausgesuhte View zurueck. Wenn eine View auf Freischaltung per PIN wartet, ist die viorherige View solange noch 
+	 * die aktive View;
+	 * @return
+	 */
+	public ViewInterface getACitveView() {
+		return this.viActive;
+	}
+	
+	/**
 	 * Beschreibt die Uebergabe der kompletten(!) PIN.
 	 * Wenn mittels selectView() eine View mit Passwort aufgerufen wurde,
 	 * kann die View hiermit freigeschaltet werden.	
 	 * @param pPassword
 	 */
+	@Deprecated
 	public void enterPIN(String pPassword) {
 		if(this.viWaitingForPassword!=null) {
 			if(pPassword.equals(this.viWaitingForPassword.getPassword())) {
@@ -105,6 +115,10 @@ public class ViewFactory {
 		}
 	}
 	
+	public void enterPIN_Digit(char pDigit) {
+		PinManager.getInstance().addDigit(pDigit);
+	}
+	
 	/**
 	 * Abbruch der Passworteingabe fuer die wartende View.
 	 */	
@@ -113,6 +127,30 @@ public class ViewFactory {
 		PinManager.getInstance().resetPIN();
 		this.gui.selectView( this.viActive.getViewID() );
 		this.viWaitingForPassword = null;
+	}
+	
+	public void clearPIN() {
+		PinManager.getInstance().resetPIN();
+	}
+	
+	/**
+	 * Im Vorfeld wurde eine PIN konstruiert. Hiermit wird der Versuch gestartet, mit der PIN die View
+	 * freizuschalten.
+	 */
+	public void okayPIN() {
+		if(PinManager.getInstance().isPinComplete() ) {
+			if(this.viWaitingForPassword.getPassword().contentEquals( PinManager.getInstance().getPIN())) {
+				
+				this.gui.selectView( this.viWaitingForPassword.getViewID() );
+				this.viActive = this.viWaitingForPassword;
+				this.viWaitingForPassword = null;
+				//System.out.println("ViewFactory.enterPassword():" + viActive.getViewID());
+			}else {
+				//System.out.println("ViewFactory.enterPassword(): Falches Passwort");
+				//this.gui.selectView( this.viActive.getViewID() );
+			}
+			PinManager.getInstance().resetPIN();
+		}
 	}
 	
 	

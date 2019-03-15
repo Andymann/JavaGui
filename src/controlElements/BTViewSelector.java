@@ -97,7 +97,6 @@ public class BTViewSelector extends JButton implements Observer{
 	        	}
 	        }
 	    });		
-		
 	}
 
 }

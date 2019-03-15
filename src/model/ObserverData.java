@@ -22,6 +22,13 @@ public class ObserverData {
 	 */
 	public static final int ODTYPE_VIEW_BG_COLOR = 0x10;
 	
+	/**
+	 * Alles, was mit derPIN fuer eine View zu tun hat.
+	 */
+	public static final int ODTYPE_PIN = 0x11;
+	
+	
+	
 	private int iType;
 	private int iValue;
 	private String sText;

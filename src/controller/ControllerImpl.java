@@ -3,7 +3,6 @@ package controller;
 import java.util.ArrayList;
 import java.util.Observer;
 
-import misc.PinManager;
 import model.Model;
 import model.ObserverData;
 import view.ViewFactory;
@@ -48,26 +47,29 @@ public class ControllerImpl {
 	
 	/**
 	 * Aufruf einer View. 
-	 * Wenn eine View mit Passwort versehen ist, kann das Password anschliessend mit ControllerImpl.enterViewPassword(String)
-	 * uebergeben werden.
+	 * Wenn eine View mit Passwort versehen ist, kann das Password anschliessend mit ControllerImpl.enterViewPIN_Digit(char)
+	 * konstruiert werden.
 	 * @param pViewID
 	 */
 	public void selectView(String pViewID) {
-		ViewFactory.getInstance().selectView(pViewID);
-		this.model.makeNotify(ObserverData.ODTYPE_VIEWSELECTED, ObserverData.OPVALUE_UNDEFINED, pViewID, false);
+		if(!ViewFactory.getInstance().getACitveView().getViewID().equals(pViewID)) {
+			ViewFactory.getInstance().selectView(pViewID);
+			this.model.makeNotify(ObserverData.ODTYPE_VIEWSELECTED, ObserverData.OPVALUE_UNDEFINED, pViewID, false);
+		}
 	}
 	
 	/**
-	 * Eingabe einer einzelnen(!) Ziffer zur weiteren Konsturktion der kompletten PIN.
+	 * Eingabe einer einzelnen Ziffer zur weiteren Konstruktion der kompletten PIN.
 	 */
 	public void enterViewPIN_Digit(char pDigit) {
-		PinManager.getInstance().addDigit(pDigit);
+		ViewFactory.getInstance().enterPIN_Digit( pDigit );
 	}
 	
 	/**
 	 * Das komplette(!) Passwort fuer die in ViewFactory auf Freischaltung wartende View.
 	 * @param pPassword
 	 */
+	@Deprecated
 	public void enterViewPIN(String pPassword) {
 		ViewFactory.getInstance().enterPIN(pPassword);
 	}
@@ -79,6 +81,17 @@ public class ControllerImpl {
 		ViewFactory.getInstance().cancelPIN();
 	}
 	
+	public void clearViewPIN() {
+		ViewFactory.getInstance().clearPIN();
+	}
+	
+	/**
+	 * Im Vorfeld wurde eine PIN konstruiert. Hiermit wird der Versuch gestartet, mit der PIN die View
+	 * freizuschalten.
+	 */
+	public void okayViewPIN() {
+		ViewFactory.getInstance().okayPIN();
+	}
 	
 	public ArrayList<ViewInterface>getViews(){
 		return ViewFactory.getInstance().getViews();

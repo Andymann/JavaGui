@@ -3,17 +3,21 @@ package view;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import controlElements.BTButton;
 import controlElements.BTLabel;
 import controller.ControllerImpl;
+import model.ObserverData;
 
-public class View_Password extends JFrame implements ViewInterface{
+public class View_Password extends JFrame implements ViewInterface, Observer{
 
 	private String sViewID;
 	private String sViewLabel;
@@ -59,6 +63,8 @@ public class View_Password extends JFrame implements ViewInterface{
 		this.getContentPane().setBackground( col );
 		this.sViewLabel = pViewLabel;
 		this.bIsSelectable = pIsSelectable;
+		
+		ControllerImpl.getInstance().addObserver( this );
 	}
 	
 	private void initLabels() {		
@@ -67,7 +73,7 @@ public class View_Password extends JFrame implements ViewInterface{
 		this.lblPIN.setBackground(Color.PINK);
 		this.lblPIN.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		this.lblPIN.setText("1234");
+		this.lblPIN.setText("");
 	}
 	
 	private void initButtons() {
@@ -178,7 +184,17 @@ public class View_Password extends JFrame implements ViewInterface{
 		    }		    
 		});
 		
+		btn_Clear.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent arg0) {
+		    	ControllerImpl.getInstance().clearViewPIN();
+		    }		    
+		});
 		
+		btn_OK.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent arg0) {
+		    	ControllerImpl.getInstance().okayViewPIN();
+		    }		    
+		});
 		
 		
 	}
@@ -234,6 +250,24 @@ public class View_Password extends JFrame implements ViewInterface{
 	@Override
 	public String getPassword() {
 		return sPassword;
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		SwingUtilities.invokeLater(new Runnable() {
+	        public void run() {
+	        	try {
+	        		ObserverData obsData = (ObserverData)arg1;
+	        		if(obsData.getType()==ObserverData.ODTYPE_PIN) {
+	        			//System.out.println("View_Password.update() Received ObserverData.Type_Test:" + obsData.getText());
+	        			View_Password.this.lblPIN.setText( obsData.getText() );
+	        		}
+	        	}catch(Exception e) {
+	        		System.out.println("View_Password.update() Exception:" + e.getMessage() );
+	        	}
+	        }
+	    });		
+		
 	}
 
 }//Class
