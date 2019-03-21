@@ -27,6 +27,12 @@ public class ObserverData {
 	 */
 	public static final int ODTYPE_PIN = 0x11;
 	
+	/**
+	 * Die Groesse der GUI wurde veraendert. Ob und wie das Signal verarbeitet wird, 
+	 * ist Rolle des jeweiligen Objektes.
+	 */
+	public static final int ODTYPE_RESIZED = 0x12;
+	
 	
 	
 	private int iType;

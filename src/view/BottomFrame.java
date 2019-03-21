@@ -39,7 +39,7 @@ public class BottomFrame extends JFrame {
 		
 		if((lstViewSelectable!=null) && (lstViewSelectable.size()>1)) {
 			vh.initRaster(lstViewSelectable.size()*2, 2, this, false, 15);
-			//vh.setInsets(new Insets(2,10,2,10));
+			vh.setInsets(new Insets(3,3,3,3));
 			
 			
 			for(int i=0; i<lstViewSelectable.size(); i++) {
@@ -50,11 +50,6 @@ public class BottomFrame extends JFrame {
 				//}
 			}
 		}
-		//vh.setInsets(new Insets(01,10,01,10));
 		
-		//vh.initRaster(10, 3, this, true);
-		//btn1.setPreferredSize( new Dimension(0,40) );
-		//vh.placeComponent(this, btn1, 0, 1, 2, 2);
-		//vh.placeComponent(this, btn2, 2, 1, 2, 2);
 	}
 }//Class

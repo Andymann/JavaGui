@@ -34,7 +34,6 @@ public class ViewHelper {
 		g.gridheight = pHeight;
 		g.gridwidth = pWidth;		
 		pFrame.add(pComponent, g);
-		
 	}
 	
 	/**
@@ -47,41 +46,7 @@ public class ViewHelper {
 	 * @param pRasterVisible
 	 */
 	public void initRaster(int pX, int pY, Container pContainer, boolean pRasterVisible){
-
 		this.initRaster(pX, pY, pContainer, pRasterVisible, -1);
-		/*
-		pContainer.setLayout( new GridBagLayout() );
-		JLabel[] lblBlanko = new JLabel[pX+pY-1];
-		for(int i=0; i<lblBlanko.length; i++){
-			lblBlanko[i] = new JLabel("");
-			lblBlanko[i].setBackground( Color.GREEN );		
-			lblBlanko[i].setOpaque( pRasterVisible );
-			lblBlanko[i].setPreferredSize(lblBlanko[i].getSize());
-		}
-				
-
-		//Die BlankoLabels platzieren
-		GridBagConstraints gbcBlanko = new GridBagConstraints();
-		gbcBlanko.insets = new Insets(01, 01, 01, 01);
-		gbcBlanko.weightx = 1.0;
-		gbcBlanko.weighty = 1.0;
-
-		//----Horizontal
-		for(int i=0; i<pX; i++){
-			gbcBlanko.gridx=i; 
-			gbcBlanko.gridy=0;
-			gbcBlanko.fill = GridBagConstraints.BOTH;
-			pContainer.add(lblBlanko[i], gbcBlanko);
-		}
-
-		//----Vertikal
-		for(int i=1; i<pY; i++){
-			gbcBlanko.gridx=0;
-			gbcBlanko.gridy=i; 
-			gbcBlanko.fill = GridBagConstraints.BOTH;
-			pContainer.add(lblBlanko[i+pX-1], gbcBlanko);
-		}
-		*/
 	}
 
 	/**
@@ -92,7 +57,7 @@ public class ViewHelper {
 	 * @param pY
 	 * @param pContainer
 	 * @param pRasterVisible
-	 * @param pHeight Die dediziert angegebene Hoehe eines Raster-Elements. Hilfreich im BottomFrame
+	 * @param pHeight -1 oder Die dediziert angegebene Hoehe eines Raster-Elements. Hilfreich im BottomFrame
 	 */
 	public void initRaster(int pX, int pY, Container pContainer, boolean pRasterVisible, int pHeight){
 		pContainer.setLayout( new GridBagLayout() );

@@ -6,6 +6,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -40,9 +42,16 @@ public class Gui extends JFrame implements Observer{
 		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		this.cardLayout = new JPanel( new CardLayout());
 		//this.setUndecorated(true);
+		this.addResizeListener();
 	}
 	
-	
+	private void addResizeListener() {
+		this.getRootPane().addComponentListener(new ComponentAdapter() {
+            public void componentResized(ComponentEvent e) {
+                ControllerImpl.getInstance().resized();
+            }
+        });
+	}
 	
 	/**
 	 * Hinzufuegen von Views. Anschliessend muss finishGui() aufgerufen werden
@@ -67,18 +76,6 @@ public class Gui extends JFrame implements Observer{
 	 * 
 	 */
 	public void selectView(String pScreenName){
-		
-		/*
-		//----Javax.Swing.Timer findet immer im EDT statt.
-		javax.swing.Timer timer = new javax.swing.Timer(0, new ActionListener() {    		
-            public void actionPerformed(ActionEvent e) {
-            	cl.show(cardLayout, pScreenName);
-            }
-        });
-    	timer.setInitialDelay(0);
-        timer.setRepeats(false);
-        timer.start();
-        */
 		SwingUtilities.invokeLater(new Runnable() {
 	        public void run() {
 	        	cl.show(cardLayout, pScreenName);

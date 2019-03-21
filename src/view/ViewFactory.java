@@ -35,7 +35,7 @@ public class ViewFactory {
 	public void initGui(){
 		gui = new Gui();
 		this.lstView.add( new View_Intro("INTRO", "Intro", false, null) );
-		this.lstView.add( new View_Password(ViewFactory.VIEWID_PASSWORD, "PaSsWoRd", false, null));
+		this.lstView.add( new View_Password(ViewFactory.VIEWID_PASSWORD, "Enter Password to access the selected View", false, null));
 		this.lstView.add( new View_Test1(ViewFactory.VIEWID_TEST1) );
 		this.lstView.add( new View_Test2(ViewFactory.VIEWID_TEST2) );
 		this.lstView.add( new View_Test3(ViewFactory.VIEWID_TEST3, "View mit PW", true, "1111") );
@@ -81,7 +81,7 @@ public class ViewFactory {
 	}
 	
 	/**
-	 * Gibt die aktiv ausgesuhte View zurueck. Wenn eine View auf Freischaltung per PIN wartet, ist die viorherige View solange noch 
+	 * Gibt die aktiv ausgesuchte View zurueck. Wenn eine View auf Freischaltung per PIN wartet, ist die viorherige View solange noch 
 	 * die aktive View;
 	 * @return
 	 */

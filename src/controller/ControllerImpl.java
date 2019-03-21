@@ -52,11 +52,11 @@ public class ControllerImpl {
 	 * @param pViewID
 	 */
 	public void selectView(String pViewID) {
-		if(!ViewFactory.getInstance().getActiveView().getViewID().equals(pViewID)) {
+		//if(!ViewFactory.getInstance().getActiveView().getViewID().equals(pViewID)) {
 			ViewFactory.getInstance().selectView(pViewID);
 			ViewFactory.getInstance().clearPIN();
 			this.model.makeNotify(ObserverData.ODTYPE_VIEWSELECTED, ObserverData.OPVALUE_UNDEFINED, pViewID, false);
-		}
+		//}		
 	}
 	
 	/**
@@ -96,6 +96,13 @@ public class ControllerImpl {
 	
 	public ArrayList<ViewInterface>getViews(){
 		return ViewFactory.getInstance().getViews();
+	}
+	
+	/**
+	 * Die Groesse der GUI wurde veraendert.
+	 */
+	public void resized() {
+		this.model.makeNotify(ObserverData.ODTYPE_RESIZED, ObserverData.OPVALUE_UNDEFINED, null, false);
 	}
 }//Class
 

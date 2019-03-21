@@ -43,6 +43,7 @@ public class View_Password extends JFrame implements ViewInterface, Observer{
 	private JButton btn_Clear;
 	
 	private JLabel lblPIN;
+	private JLabel lblHeadline;
 	
 	
 	public View_Password(String pViewID) {
@@ -55,13 +56,13 @@ public class View_Password extends JFrame implements ViewInterface, Observer{
 	
 	private void initView(String pViewID, String pViewLabel, boolean pIsSelectable, String pPassword) {
 		this.sViewID = pViewID;
+		this.sViewLabel = pViewLabel;
 		this.sPassword = pPassword;
 		new ViewHelper().initRaster(16, 9, this, false);		
 		this.initButtons();
 		this.initLabels();
 		this.placeComponents();
 		this.getContentPane().setBackground( col );
-		this.sViewLabel = pViewLabel;
 		this.bIsSelectable = pIsSelectable;
 		
 		ControllerImpl.getInstance().addObserver( this );
@@ -71,9 +72,20 @@ public class View_Password extends JFrame implements ViewInterface, Observer{
 		this.lblPIN = new BTLabel();
 		this.lblPIN.setOpaque(true);
 		this.lblPIN.setBackground(Color.PINK);
-		this.lblPIN.setHorizontalAlignment(SwingConstants.CENTER);
-		
+		this.lblPIN.setHorizontalAlignment(SwingConstants.CENTER);		
 		this.lblPIN.setText("");
+		
+		this.lblHeadline = new BTLabel();
+		this.lblHeadline.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		if(this.sViewLabel!=null) {
+			this.lblHeadline.setText( sViewLabel);
+		}else {
+			this.lblHeadline.setText( sViewID );
+		}
+		
+		
+		
 	}
 	
 	private void initButtons() {
@@ -98,8 +110,6 @@ public class View_Password extends JFrame implements ViewInterface, Observer{
 		    }		    
 		});
 		
-		
-		
 		btn_0 = new BTButton("0");
 		btn_1 = new BTButton("1");
 		btn_2 = new BTButton("2");
@@ -113,7 +123,6 @@ public class View_Password extends JFrame implements ViewInterface, Observer{
 		btn_OK = new BTButton("OK");
 		btn_Cancel = new BTButton("Cancel");
 		btn_Clear = new BTButton("Clear");
-		
 		
 		
 		btn_0.addActionListener(new ActionListener() {
@@ -176,8 +185,6 @@ public class View_Password extends JFrame implements ViewInterface, Observer{
 		    }		    
 		});
 		
-		
-		
 		btn_Cancel.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent arg0) {
 		    	ControllerImpl.getInstance().cancelViewPIN();
@@ -203,6 +210,7 @@ public class View_Password extends JFrame implements ViewInterface, Observer{
 //		new ViewHelper().placeComponent(this, btnPW_Correct, 1, 1, 2, 1);
 //		new ViewHelper().placeComponent(this, btnPW_Incorrect, 3, 1, 2, 1);
 //		new ViewHelper().placeComponent(this, btnPW_Cancel, 9, 1, 2, 1);
+		new ViewHelper().placeComponent(this, lblHeadline, 4, 0, 8, 1);
 		
 		new ViewHelper().placeComponent(this, lblPIN, 5, 1, 6, 1);
 		new ViewHelper().placeComponent(this, btn_1, 5, 2, 2, 1);
