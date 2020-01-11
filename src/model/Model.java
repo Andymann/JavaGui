@@ -1,21 +1,12 @@
 package model;
 
-import java.net.SocketException;
 import java.util.Observable;
 import java.util.Observer;
-
-import ch.bildspur.artnet.ArtNetClient;
-import ch.bildspur.artnet.ArtNetException;
-import ch.bildspur.artnet.ArtNetServer;
-import ch.bildspur.artnet.packets.ArtPollReplyPacket;
 
 public class Model extends Observable {
 
 	private static String NAME = "Test-Project";
 	private static String VERSION = "008";
-
-	private ArtNetServer artNetServer;
-	private ArtNetClient artNetClient;
 
 	public Model() {
 		this.init();
@@ -43,28 +34,6 @@ public class Model extends Observable {
 		ObserverData obsData = new ObserverData(pObserverType, pValue, pText, pBool);
 		this.setChanged();
 		this.notifyObservers(obsData);
-	}
-
-	private void initArtNetServer() {
-		ArtPollReplyPacket aprp = new ArtPollReplyPacket();
-		aprp.setLongName("Deine Mudder");
-		aprp.setShortName("DM");
-
-		this.artNetServer = new ArtNetServer();
-		this.artNetServer.setDefaultReplyPacket(aprp);
-		try {
-			this.artNetServer.start();
-		} catch (SocketException | ArtNetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-
-	private void initArtNetClient() {
-		this.artNetClient = new ArtNetClient(null);
-		byte[] dmxData = new byte[512];
-		this.artNetClient.broadcastDmx(1, 1, dmxData);
 	}
 
 	// public void sendDMX() {
